@@ -1,0 +1,17 @@
+Fluent API
+----------
+
+- Words().anagram("moonstarer").match("..t.o.....") -> "astronomer"
+
+- Do we need to create the Words object?
+  - Could the first method be static?
+
+- Words.anagram("moonstarer").match("..t.o.....") -> "astronomer"
+
+- The static form looks nicer
+  - Not sure how it would work though
+
+- Each method returns a Words object with the currently filtered
+  collection of Words
+
+  

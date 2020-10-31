@@ -1,4 +1,5 @@
 from nltk.corpus import wordnet
+from .word_utils import WordUtils
 
 
 class DefinitionHelper(object):
@@ -8,7 +9,7 @@ class DefinitionHelper(object):
     """
 
     @staticmethod
-    def words_for_definition(word):
+    def words_for_definition(definition):
         """
         Finds a collection of words from a hint. For example:
           "rodents" -> "rats", "mice" etc
@@ -16,7 +17,7 @@ class DefinitionHelper(object):
         synsets = set()
 
         # We look up synsets for the word. These are words / concepts with the same meaning...
-        for synset in wordnet.synsets(word):
+        for synset in wordnet.synsets(definition):
             # For each synset, we look up similar words...
             synsets = synsets.union(DefinitionHelper._find_similar_synsets(synset, 3))
 
@@ -31,9 +32,14 @@ class DefinitionHelper(object):
         for synset in synsets:
             words_in_synset = DefinitionHelper._words_from_synset(synset)
             for word_in_synset in words_in_synset:
-                if words_in_synset in words: continue
-                words.add(word_in_synset)
-                yield word_in_synset
+
+                # We clean the word, for example, to remove underscores...
+                clean_word = WordUtils.clean_word(word_in_synset)
+
+                # We return the word (if we have not already returned it previously)...
+                if clean_word in words: continue
+                words.add(clean_word)
+                yield clean_word
 
     @staticmethod
     def _find_similar_synsets(synset, similar_to_recursion_level=0):

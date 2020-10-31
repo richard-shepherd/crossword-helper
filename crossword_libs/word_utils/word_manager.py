@@ -5,8 +5,9 @@ from nltk.stem import WordNetLemmatizer
 from collections import defaultdict
 from singleton_decorator import singleton
 from ..utils import Utils
-from .word_info import WordInfo
 from .lemma_info import LemmaInfo
+from .word_info import WordInfo
+from .word_utils import WordUtils
 
 @singleton
 class WordManager(object):
@@ -65,7 +66,7 @@ class WordManager(object):
         logging.info("Loading words from corpus: {0}".format(str(corpus.root)))
         for (word, pos_tag) in corpus.tagged_words():
             # We clean up the word, removing punctuation, whitespace etc...
-            clean_word = self._clean_word(word)
+            clean_word = WordUtils.clean_word(word)
             if clean_word == "": continue
             
             # We add the word and its tag to the map of word -> pos-tags...
@@ -86,7 +87,7 @@ class WordManager(object):
         # We add these words to our collection, if we do not already have them...
         active_first_letter = ""
         for word in words:
-            clean_word = self._clean_word(word)
+            clean_word = WordUtils.clean_word(word)
             if clean_word in self.word_infos: continue  # We already have this word from a different source
 
             # We log when as we process each letter...
@@ -125,18 +126,6 @@ class WordManager(object):
                 if wordnet_pos is not None:
                     lemma = self._lemmatizer.lemmatize(word, pos=wordnet_pos)
                     self.lemma_infos[lemma].word_forms[pos_tag] = word
-
-    def _clean_word(self, word):
-        """
-        Returns a 'clean' form of the word passed in.
-        - Removes whitespace
-        - Removes punctuation
-        - Converts to lower-case
-        """
-        clean_word_filter = filter(str.isalpha, word)
-        clean_word = "".join(clean_word_filter)
-        clean_word = clean_word.lower()
-        return clean_word
 
     def _get_wordnet_pos(self, pos_tag):
         """

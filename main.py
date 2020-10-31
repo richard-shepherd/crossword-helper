@@ -3,13 +3,34 @@ from crossword_libs import AnagramHelper
 from crossword_libs import DefinitionHelper
 from crossword_libs import Utils
 from crossword_libs import WordManager
+from crossword_libs import Words
 
 
 
 Utils.log_to_stdout()
 
-for word in DefinitionHelper.words_for_definition("rodents"):
-    print(word)
+# for word in Words().match(".str.n.m.."):
+#     print(word)
+
+# for word in Words().match("b..tle"):
+#     print(word)
+
+# for word in Words().anagrams("rats").match("t..."):
+#     print(word)
+
+# for word in Words().length(20):
+#     print(word)
+
+Words().definition("vehicle").length(3).print()
+
+#Words().definition("rodent").length(5).print()
+
+
+    
+
+
+# for word in DefinitionHelper.words_for_definition("stargazer"):
+#     print(word)
 
 # for word in AnagramHelper().anagrams("rats"):
 #     print(word)

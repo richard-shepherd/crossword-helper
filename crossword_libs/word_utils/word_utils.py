@@ -7,6 +7,19 @@ class WordUtils(object):
     """
 
     @staticmethod
+    def clean_word(word):
+        """
+        Returns a 'clean' form of the word passed in.
+        - Removes whitespace
+        - Removes punctuation
+        - Converts to lower-case
+        """
+        clean_word_filter = filter(str.isalpha, word)
+        clean_word = "".join(clean_word_filter)
+        clean_word = clean_word.lower()
+        return clean_word
+
+    @staticmethod
     def remove_letters_from_word(word, letters):
         """
         Removes letters from word. 
