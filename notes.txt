@@ -1,17 +1,18 @@
-Fluent API
-----------
 
-- Words().anagram("moonstarer").match("..t.o.....") -> "astronomer"
+Problems / improvements
+-----------------------
 
-- Do we need to create the Words object?
-  - Could the first method be static?
+- There are too many two-letter words which are not real words 
+  - We should filter these out
+  - Same for one-letter words
 
-- Words.anagram("moonstarer").match("..t.o.....") -> "astronomer"
+- Is there a list of words used in crosswords which could be used as a filter?
 
-- The static form looks nicer
-  - Not sure how it would work though
+- Multi-word anagrams should be shown split by word (or underscore) to make them more readable
 
-- Each method returns a Words object with the currently filtered
-  collection of Words
+
+
+
+
 
   
