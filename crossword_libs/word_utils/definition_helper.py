@@ -1,4 +1,5 @@
 from nltk.corpus import wordnet
+from .word_manager import WordManager
 from .word_utils import WordUtils
 
 
@@ -13,6 +14,29 @@ class DefinitionHelper(object):
         """
         Finds a collection of words from a hint. For example:
           "rodents" -> "rats", "mice" etc
+        """
+
+        # We find lemmas for the definition...
+        lemmas = DefinitionHelper._lemmas_for_definition(definition)
+
+        # We convert each lemma to the part-of-speech corresponding to the definition.
+        # For example, even if the definition was "rodents" (ie, plural) the lemmas
+        # we have found will all be singular. 
+        #
+        # We find the pos-tags for the original word (for example, "NNS" for "rodents")
+        # and then find the corresponding form for each lemma.
+        word_manager = WordManager()
+        definition_pos_tags = word_manager.get_pos_tags(definition)
+        for definition_pos_tag in definition_pos_tags:
+            for lemma in lemmas:
+                # We find the part-of-speech for this lemma for the current pos-tag...
+                part_of_speech = word_manager.get_part_of_speech(lemma, definition_pos_tag)
+                yield part_of_speech
+
+    @staticmethod
+    def _lemmas_for_definition(definition):
+        """
+        Returns an iterable of lemmas for the definition provided.
         """
         synsets = set()
 

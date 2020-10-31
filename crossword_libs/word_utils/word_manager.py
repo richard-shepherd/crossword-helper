@@ -48,6 +48,31 @@ class WordManager(object):
         else:
             return (word for word in self.word_infos if len(word) == length)
 
+    def get_pos_tags(self, word):
+        """
+        Returns the collection of pos-tags for the word.
+        """
+        return self.word_infos[word].pos_tags
+
+    def get_part_of_speech(self, lemma, pos_tag):
+        """
+        Returns a word corresponding to the lemma and pos-tag specified.
+        If we cannot find a word for the pos-tag, we return the lemma itself.
+        """
+
+        # We check if we have info for this lemma...
+        if lemma not in self.lemma_infos:
+            return lemma  # We do not have info for the lemma, so we just return it
+
+        # We have info for this lemma - so we check if we have a form for the 
+        # pos-tag requested...
+        lemma_info  = self.lemma_infos[lemma]
+        if pos_tag not in lemma_info.word_forms:
+            return lemma  # We do not have a word-form for the requested pos-tag, so we return the lemma
+
+        # We have a word-form for the lemma and pos-tag requested...
+        return self.lemma_infos[lemma].word_forms[pos_tag]
+
     def _load_all_words(self):
         """
         Loads a collection of all English words and creates maps:
@@ -56,7 +81,7 @@ class WordManager(object):
         """
         self._load_words_from_corpus(nltk.corpus.brown)
         self._load_words_from_corpus(nltk.corpus.treebank)
-        #self._load_words_from_file()
+        self._load_words_from_file()
         self._map_lemmas_to_words()
 
     def _load_words_from_corpus(self, corpus):

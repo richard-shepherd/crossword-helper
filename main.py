@@ -21,7 +21,7 @@ Utils.log_to_stdout()
 # for word in Words().length(20):
 #     print(word)
 
-Words().definition("vehicle").length(3).print()
+Words().definition("rodents").length(5).print()
 
 #Words().definition("rodent").length(5).print()
 
