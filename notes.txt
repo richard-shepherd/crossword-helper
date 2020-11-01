@@ -35,6 +35,26 @@ Problems / improvements
 - Need to be better at charade clues
 
 
+Bits and Pieces
+---------------
+- How do we parse for bits-and-pieces (bp)?
 
+- There are two things we want to do which seem to contradict each other:
+
+- A) We want to look for any occurence of a bp word / phrase, even if it
+  is part of a longer word.
+  - For example: sailor = tar
+  - We want to return this even if the word in the clue is "sailors"
+  - So we search for "sailor" in clue
+
+- B) But: some bp words / phrases are very short
+  - eg, "a", "us", "te" etc
+  - Or even sub-words in longer words, eg "right" in "righteous"
+  - If these are not whole words, we do not want to report them
+
+- How do we square the circle of A) and B)?
+
+- Maybe on the length of the word?
+  - If it is <= 3 letters, then it has to be a whole word?
 
   

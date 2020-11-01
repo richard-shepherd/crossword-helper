@@ -2101,6 +2101,7 @@
    pi: good
    pi: relationship
    pi: religious
+   pi: self righteous
    pi: upright
    pier: mole
    pin: number

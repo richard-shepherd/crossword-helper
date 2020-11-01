@@ -20,6 +20,17 @@ class WordUtils(object):
         return clean_word
 
     @staticmethod
+    def remove_punctuation(text, convert_to_lowercase=True):
+        """
+        Removes punctuation from the text passed in, but leaves spaces.
+        """
+        result = text
+        result = "".join(filter(WordUtils.is_alpha_or_space, result))
+        if convert_to_lowercase:
+            result = result.lower()
+        return result
+
+    @staticmethod
     def remove_letters_from_word(word, letters):
         """
         Removes letters from word. 
@@ -83,4 +94,12 @@ class WordUtils(object):
                     l = list(combination_with_first_length)
                     l.extend(remaining_combination)
                     yield l
+
+    @staticmethod
+    def is_alpha_or_space(letter):
+        """
+        Returns True if the letter is alpha or a space, False otherwise.
+        """
+        return str.isalpha(letter) or str.isspace(letter)
+
 

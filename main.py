@@ -1,5 +1,7 @@
 import itertools
 from crossword_libs import AnagramHelper
+from crossword_libs import BitsAndPieces
+from crossword_libs import Clue
 from crossword_libs import DefinitionHelper
 from crossword_libs import Utils
 from crossword_libs import WordManager
@@ -8,6 +10,11 @@ from crossword_libs import Words
 
 
 Utils.log_to_stdout()
+
+Clue.parse("Self righteous sailors are good workers")
+
+# for info in BitsAndPieces().bits_and_pieces_from_clue("Self righteous sailors are good workers"):
+#     print(info)
 
 # for word in Words().match(".str.n.m.."):
 #     print(word)
@@ -21,13 +28,9 @@ Utils.log_to_stdout()
 # for word in Words().length(20):
 #     print(word)
 
-Words().definition("rodents").length(5).print()
+#Words().definition("rodents").length(5).print()
 
 #Words().definition("rodent").length(5).print()
-
-
-    
-
 
 # for word in DefinitionHelper.words_for_definition("stargazer"):
 #     print(word)
