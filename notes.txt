@@ -27,6 +27,13 @@ Problems / improvements
   - Laugh = HA
   - More = OVER
 
+  - Run = GO
+  - Officer = COL
+  - Not wrong = LEGAL
+  - Yarn = HANK
+  - Strike = RAM
+  - Hear  = TRY
+
 - contains(letters)
   - Word must contain letters
   - Even though we're not sure where
