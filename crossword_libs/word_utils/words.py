@@ -2,6 +2,7 @@ import re
 from .anagram_helper import AnagramHelper
 from .definition_helper import DefinitionHelper
 from .word_manager import WordManager
+from .word_utils import WordUtils
 
 
 class Words(object):
@@ -37,10 +38,18 @@ class Words(object):
 
     def match(self, pattern):
         """
-        Finds words which match the regex pattern supplied.
+        Returns words which match the regex pattern supplied.
         """
         result = Words()
         result.words = self._internal_match(pattern)
+        return result
+
+    def contains(self, letters):
+        """
+        Returns words which contain the letters specified.
+        """
+        result = Words()
+        result.words = self._internal_contains(letters)
         return result
 
     def anagrams(self, word, word_lengths=None):
@@ -79,9 +88,23 @@ class Words(object):
         return result
 
     def _internal_match(self, pattern):
+        """
+        Returns an iterable of words which match the pattern provided.
+        """
         compiled_re = re.compile(pattern)
         for word in self.words:
             if compiled_re.fullmatch(word) is not None:
+                yield word
+
+    def _internal_contains(self, letters):
+        """
+        Returns an iterable of words which contain the letters provided.
+        """
+        len_letters = len(letters)
+        for word in self.words:
+            len_word = len(word)
+            word_with_letters_removed = WordUtils.remove_letters_from_word(word, letters)
+            if len(word_with_letters_removed) == (len_word - len_letters):
                 yield word
 
 
