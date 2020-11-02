@@ -33,6 +33,13 @@ Problems / improvements
   - Yarn = HANK
   - Strike = RAM
   - Hear  = TRY
+  - Computer = PC, MAC
+  - Applaud = CLAP
+  - Role = PART
+  - Householder = SNAIL
+  - Island = RUM
+  - Rum = island
+  - Old = O
 
 - contains(letters)
   - Word must contain letters
